@@ -1,0 +1,9 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+pokeball_icon.pngZone.Identifier
+pokeball_icon.png
+2021-10-25_20h55_29.png
+fonts
