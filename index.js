@@ -1,3 +1,4 @@
+import { fetchPokemon } from "./app/fetch";
 import { createPokemon, createElement, fetchPokemons } from "/.screen.js";
 
 const pokePanel = document.querySelector(".choose-panel__buttons");
