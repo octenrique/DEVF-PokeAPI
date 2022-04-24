@@ -1,7 +1,10 @@
-import { fetchPokemon } from "./fetch.js";
-fetchPokemon(1);
+import { showPokemon } from "./fetch.js";
+// fetchPokemon(1);
+let { pokeName, pokeAbilities, pokeImage } = showPokemon;
 
-const pokeImg = document.querySelector(".poke-image");
+const pokeImgS = document.querySelector(".poke-image");
+pokeImgS.innerHTML = `<h2>${pokeAbilities}</h2>`;
+// pokeImgS.innerHTML = `<img src="pokeImage"/>`;
 
 // //CREATING POKEMONS
 
