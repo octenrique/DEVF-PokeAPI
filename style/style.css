@@ -1,6 +1,6 @@
 @font-face {
   font-family: "PokeFont";
-  src: url(fonts/Pokemon\ Classic.ttf);
+  src: url(../fonts/Pokemon\ Classic.ttf);
 }
 
 :root {
@@ -161,6 +161,12 @@ body {
   height: 100%;
 }
 
+.poke-image__image{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
 .left-side__buttons {
   display: flex;
   justify-content: space-between;
@@ -183,6 +189,42 @@ body {
 
 }
 
+.buttons__screen-header{
+  display: flex;
+  width: 100%;
+  height: 30%;
+}
+
+.header__name-container,
+.header__type-container
+{
+  display: flex;
+  width: 50%;
+  height: 100%;
+  font-size: .75rem;
+
+}
+
+.header__layer{
+  width: 40%;
+  height: 100%;
+}
+
+.header__APIValue-type,
+.header__APIValue-name {
+  justify-content: center;
+  align-items: center;
+  width: 60%;
+  height: 100%;
+}
+
+.buttons__screen-description {
+  width: 100%;
+  height: 70%;
+  font-size: .75rem;
+
+}
+
 .buttons__buttons{
   width: 25%;
   height: 80%;
@@ -198,7 +240,7 @@ body {
   height: 50px;
   border-radius: 100%;
   box-shadow: -3px 3px 0 0 black ;
-  
+
 }
 
 .buttons__forward-backward{
@@ -211,17 +253,17 @@ body {
 }
 
 .buttons-backward{
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent; 
-  border-right:20px solid #2C2C2C; 
+  border-bottom: 20px solid transparent;
+  border-right:20px solid #2C2C2C;
 }
 
 
 .buttons-forward {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 20px solid #2C2C2C;
@@ -273,11 +315,11 @@ body {
 }
 
 .choose-panel__previous{
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-top: 20px solid transparent;
-  border-bottom: 20px solid transparent; 
-  border-right:20px solid #2C2C2C; 
+  border-bottom: 20px solid transparent;
+  border-right:20px solid #2C2C2C;
 
 }
 
@@ -294,8 +336,8 @@ body {
 }
 
 .choose-panel__next {
-  width: 0; 
-  height: 0; 
+  width: 0;
+  height: 0;
   border-top: 20px solid transparent;
   border-bottom: 20px solid transparent;
   border-left: 20px solid #2C2C2C;
@@ -320,21 +362,45 @@ img {
   height: 30vh;
 }
 
-.right-side__filter {
-  padding: 0 0 0 20px;
+.right-side__filter{
+  display: flex;
+  background-color: #084035;
+  width: 88%;
+  height: 18vh;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  left: 22px;
+  top: 65px;
+  border-radius: 10px;
+  box-shadow: -5px 5px 0 0 #062923 inset;
+}
+
+.right-side__filter-container {
+  font-weight: bold;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
   color: white;
   background-color: #084035;
   width: 88%;
-  height: 18vh;
-  position: relative;
-  left: 22px;
-  top: 65px;
-  border-radius: 10px;
-  box-shadow: -5px 5px 0 0 #062923 inset;
-
+  height: 16vh;
 }
 
 
+
+.filter__name{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  text-align: center;
+}
+
+#name {
+  border: 0;
+  outline:0;
+  background-color: #062923;
+  border-radius: 5px;
+  width: 60%;
+  text-align: center;
+}
