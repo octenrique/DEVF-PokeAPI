@@ -18,85 +18,87 @@
   <body>
     <span id="spanError"></span>
     <div class="pokedex">
-      <div class="left-side">
-        <div class="left-side__header">
-          <div class="header-lights">
-            <div class="header__blue-button">
-              <div class="blue-button__white-border">
-                <div class="blue-button__blue-color"></div>
+      <div class="left-side-container">
+        <div class="left-side">
+          <div class="left-side__header">
+            <div class="header-lights">
+              <div class="header__blue-button">
+                <div class="blue-button__white-border">
+                  <div class="blue-button__blue-color"></div>
+                </div>
+              </div>
+              <div class="light__buttons">
+                <div class="buttons__red"></div>
+                <div class="buttons__yellow"></div>
+                <div class="buttons__green"></div>
               </div>
             </div>
-            <div class="light__buttons">
-              <div class="buttons__red"></div>
-              <div class="buttons__yellow"></div>
-              <div class="buttons__green"></div>
-            </div>
+            <div class="header__connection"></div>
           </div>
-          <div class="header__connection"></div>
-        </div>
-        <div class="left-side__poke-screen">
-          <div class="poke-screen__left"></div>
-          <div class="poke-screen__display">
-            <div class="display__image">
-              <div class="poke-info">
-                <div class="info__name-container">
-                  <div class="info__layer">Name:</div>
-                  <div class="info__APIValue-name">
-                    <p></p>
+          <div class="left-side__poke-screen">
+            <div class="poke-screen__left"></div>
+            <div class="poke-screen__display">
+              <div class="display__image">
+                <div class="poke-info">
+                  <div class="info__name-container">
+                    <div class="info__layer">Name:</div>
+                    <div class="info__APIValue-name">
+                      <p></p>
+                    </div>
+                  </div>
+                  <div class="info__hp-container">
+                    <div class="info__layer">HP:</div>
+                    <div class="info__APIValue-hp">
+                      <p></p>
+                    </div>
+                  </div>
+                  <div class="info__attack-container">
+                    <div class="info__layer">Attack:</div>
+                    <div class="info__APIValue-attack">
+                      <p></p>
+                    </div>
+                  </div>
+                  <div class="info__defense-container">
+                    <div class="info__layer">Defense:</div>
+                    <div class="info__APIValue-defense">
+                      <p></p>
+                    </div>
                   </div>
                 </div>
-                <div class="info__hp-container">
-                  <div class="info__layer">HP:</div>
-                  <div class="info__APIValue-hp">
-                    <p></p>
-                  </div>
+                <div class="poke-image">
+                  <img
+                    class="poke-image__image"
+                    alt="This is the sprite of the pokemon"
+                  />
                 </div>
-                <div class="info__attack-container">
-                  <div class="info__layer">Attack:</div>
-                  <div class="info__APIValue-attack">
-                    <p></p>
-                  </div>
-                </div>
-                <div class="info__defense-container">
-                  <div class="info__layer">Defense:</div>
-                  <div class="info__APIValue-defense">
-                    <p></p>
-                  </div>
-                </div>
-              </div>
-              <div class="poke-image">
-                <img
-                  class="poke-image__image"
-                  alt="This is the sprite of the pokemon"
-                />
               </div>
             </div>
           </div>
-        </div>
-        <div class="left-side__buttons">
-          <div class="buttons__screen">
-            <!-- <div class="buttons__screen-header">
-              <div class="header__name-container">
-                <div class="header__layer">Name:</div>
-                <div class="header__APIValue-name">
-                  <p></p>
-                </div>
-              </div>
-              <div class="header__type-container">
-                <div class="header__layer">Type:</div>
-                <div class="header__APIValue-type">
-                  <p></p>
-                </div>
-              </div>
-            </div> -->
-            <div class="buttons__screen-description">Description:</div>
-            <div class="screen__description-container"></div>
+          <div class="left-side__buttons">
+            <div class="buttons__screen">
+              <!-- <div class="buttons__screen-header">
+          <div class="header__name-container">
+            <div class="header__layer">Name:</div>
+            <div class="header__APIValue-name">
+              <p></p>
+            </div>
           </div>
-          <div class="buttons__buttons">
-            <div class="buttons__random"></div>
-            <div class="buttons__forward-backward">
-              <div class="buttons-backward"></div>
-              <div class="buttons-forward"></div>
+          <div class="header__type-container">
+            <div class="header__layer">Type:</div>
+            <div class="header__APIValue-type">
+              <p></p>
+            </div>
+          </div>
+        </div> -->
+              <div class="buttons__screen-description">Description:</div>
+              <div class="screen__description-container"></div>
+            </div>
+            <div class="buttons__buttons">
+              <div class="buttons__random"></div>
+              <div class="buttons__forward-backward">
+                <div class="buttons-backward"></div>
+                <div class="buttons-forward"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -105,38 +107,40 @@
         <div class="center__top-elipse"></div>
         <div class="center__bottom-elipse"></div>
       </div>
-      <div class="right-side">
-        <div class="right-side__choose-panel">
-          <div id="previous" class="choose-panel__previous"></div>
-          <div class="choose-panel__buttons"></div>
-          <div id="next" class="choose-panel__next"></div>
-        </div>
-        <div class="right-side__footer">
-          <div class="right-side__filter">
-            <div class="right-side__filter-container">
-              <div class="filter__name">
-                <label for="name">Pokemon Name:</label>
-                <input
-                  type="text"
-                  id="name"
-                  placeholder="Choose your Pokemon"
-                />
-              </div>
-              <div class="filter__generation">
-                <label for="generation">Choose the generation:</label>
-                <select
-                  name="generation"
-                  id="generation"
-                  placeholder="Choose the generation"
-                ></select>
-              </div>
-              <div class="filter__type">
-                <label for="type">Choose the type:</label>
-                <select
-                  name="type"
-                  id="type"
-                  placeholder="Choose the type"
-                ></select>
+      <div class="right-side-container">
+        <div class="right-side">
+          <div class="right-side__choose-panel">
+            <div id="previous" class="choose-panel__previous"></div>
+            <div class="choose-panel__buttons"></div>
+            <div id="next" class="choose-panel__next"></div>
+          </div>
+          <div class="right-side__footer">
+            <div class="right-side__filter">
+              <div class="right-side__filter-container">
+                <div class="filter__name">
+                  <label for="name">Pokemon Name or ID:</label>
+                  <input
+                    type="text"
+                    id="name"
+                    placeholder="Choose your Pokemon"
+                  />
+                </div>
+                <div class="filter__generation">
+                  <label for="generation">Choose the generation:</label>
+                  <select
+                    name="generation"
+                    id="generation"
+                    placeholder="Choose the generation"
+                  ></select>
+                </div>
+                <div class="filter__type">
+                  <label for="type">Choose the type:</label>
+                  <select
+                    name="type"
+                    id="type"
+                    placeholder="Choose the type"
+                  ></select>
+                </div>
               </div>
             </div>
           </div>

@@ -18,7 +18,6 @@ async function getPokemon(id = 1) {
     const dataGet = await resGet.json();
     const dataDescription = await resDescription.json();
 
-    console.log(dataDescription.flavor_text_entries[0]);
     infoPokemon(dataGet);
     gridPokemons(dataGet);
     descriptionPokemon(dataDescription);
@@ -54,7 +53,7 @@ const descriptionPokemon = (dataDescription) => {
     ".screen__description-container"
   );
 
-  let pokeDescription = dataDescription.flavor_text_entries[69].flavor_text;
+  let pokeDescription = dataDescription.flavor_text_entries[0].flavor_text;
 
   pokedexDescription.innerHTML = `<p>${pokeDescription}</p>`;
 };
