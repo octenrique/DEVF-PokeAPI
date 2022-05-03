@@ -167,9 +167,17 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: end;
 }
 
-
+.info__name-container,
+.info__hp-container,
+.info__attack-container,
+.info__defense-container{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+}
 
 
 .poke-image{
@@ -202,7 +210,10 @@ body {
   border-radius: 10px;
   border: 1px solid black;
   box-shadow: -5px 5px 0 0 #46915E inset;
-
+  display: flex;
+  justify-: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .buttons__screen-header{
@@ -235,10 +246,15 @@ body {
 }
 
 .buttons__screen-description {
-  width: 100%;
-  height: 70%;
+  width: 90%;
+  height: 20%;
   font-size: .75rem;
+}
 
+.screen__description-container {
+  width: 90%;
+  height: 80%;
+  font-size: .7rem;
 }
 
 .buttons__buttons{

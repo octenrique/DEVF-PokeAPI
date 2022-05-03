@@ -1,6 +1,6 @@
 ("use strict");
 
-const URL_POKEMON = `https://pokeapi.co/api/v2/pokemon/`;
+const URL_POKEMON = `https://pokeapi.co/api/v2/pokemon`;
 const URL_POKEMON_ABILITY = `https://pokeapi.co/api/v2/ability/`;
 const POKE_GRID = document.querySelector(".choose-panel__buttons");
 const PREVIOUS = document.querySelector(".choose-panel__previous");
@@ -13,11 +13,15 @@ let limit = 19;
 
 async function getPokemon(id = 1) {
   try {
-    const response = await fetch(`${URL_POKEMON}${id}/`);
-    const data = await response.json();
-    console.log(data);
-    gridPokemons(data);
-    infoPokemon(data);
+    const resGet = await fetch(`${URL_POKEMON}/${id}/`);
+    const resDescription = await fetch(`${URL_POKEMON}-species/${id}`);
+    const dataGet = await resGet.json();
+    const dataDescription = await resDescription.json();
+
+    console.log(dataDescription.flavor_text_entries[0]);
+    infoPokemon(dataGet);
+    gridPokemons(dataGet);
+    descriptionPokemon(dataDescription);
   } catch (err) {
     console.log(new Error("It couldn't be possible to connect to the PokeAPI"));
   }
@@ -25,19 +29,18 @@ async function getPokemon(id = 1) {
 
 //* Creating Pokemon
 
-const infoPokemon = (data) => {
+const infoPokemon = (dataGet) => {
   let pokedexName = document.querySelector(".info__APIValue-name"),
     pokedexHp = document.querySelector(".info__APIValue-hp"),
     pokedexAttack = document.querySelector(".info__APIValue-attack"),
     pokedexDefense = document.querySelector(".info__APIValue-defense"),
     pokedexImg = document.querySelector(".poke-image__image");
 
-  let pokeName = data.name,
-    // pokeAbilities = `${data.types[0]["type"]["name"]} & ${data.types[1]["type"]["name"]}`,
-    pokeHp = data.stats[0].base_stat,
-    pokeAttack = data.stats[1].base_stat,
-    pokeDefense = data.stats[2].base_stat,
-    pokeImage = data.sprites.front_default;
+  let pokeName = dataGet.name,
+    pokeHp = dataGet.stats[0].base_stat,
+    pokeAttack = dataGet.stats[1].base_stat,
+    pokeDefense = dataGet.stats[2].base_stat,
+    pokeImage = dataGet.sprites.front_default;
 
   pokedexName.innerHTML = `<p><b>${pokeName}</b></p>`;
   pokedexHp.innerHTML = `<p><b>${pokeHp}</b></p>`;
@@ -46,9 +49,19 @@ const infoPokemon = (data) => {
   pokedexImg.src = pokeImage;
 };
 
+const descriptionPokemon = (dataDescription) => {
+  let pokedexDescription = document.querySelector(
+    ".screen__description-container"
+  );
+
+  let pokeDescription = dataDescription.flavor_text_entries[69].flavor_text;
+
+  pokedexDescription.innerHTML = `<p>${pokeDescription}</p>`;
+};
+
 //* Attaching to the grid side
 
-const gridPokemons = (data) => {
+const gridPokemons = (dataGet) => {
   const imageContainer = document.createElement("div");
   imageContainer.classList.add("pokemon-thumbnail");
 
@@ -56,7 +69,7 @@ const gridPokemons = (data) => {
   spriteContainer.classList.add("img-container");
 
   const sprite = document.createElement("img");
-  sprite.src = data.sprites.front_default;
+  sprite.src = dataGet.sprites.front_default;
 
   spriteContainer.appendChild(sprite);
   imageContainer.appendChild(spriteContainer);
