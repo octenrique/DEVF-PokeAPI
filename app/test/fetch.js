@@ -15,9 +15,9 @@ async function getPokemon(id = 1) {
   try {
     const response = await fetch(`${URL_POKEMON}${id}/`);
     const data = await response.json();
-
+    console.log(data);
     gridPokemons(data);
-    createPokemon(data);
+    infoPokemon(data);
   } catch (err) {
     console.log(new Error("It couldn't be possible to connect to the PokeAPI"));
   }
@@ -25,17 +25,24 @@ async function getPokemon(id = 1) {
 
 //* Creating Pokemon
 
-const createPokemon = (data) => {
-  let pokedexName = document.querySelector(".header__APIValue-name"),
-    pokedexType = document.querySelector(".header__APIValue-type"),
+const infoPokemon = (data) => {
+  let pokedexName = document.querySelector(".info__APIValue-name"),
+    pokedexHp = document.querySelector(".info__APIValue-hp"),
+    pokedexAttack = document.querySelector(".info__APIValue-attack"),
+    pokedexDefense = document.querySelector(".info__APIValue-defense"),
     pokedexImg = document.querySelector(".poke-image__image");
 
   let pokeName = data.name,
-    pokeAbilities = `${data.types[0]["type"]["name"]} & ${data.types[1]["type"]["name"]}`,
+    // pokeAbilities = `${data.types[0]["type"]["name"]} & ${data.types[1]["type"]["name"]}`,
+    pokeHp = data.stats[0].base_stat,
+    pokeAttack = data.stats[1].base_stat,
+    pokeDefense = data.stats[2].base_stat,
     pokeImage = data.sprites.front_default;
 
   pokedexName.innerHTML = `<p><b>${pokeName}</b></p>`;
-  pokedexType.innerHTML = `<p><b>${pokeAbilities}</b></p>`;
+  pokedexHp.innerHTML = `<p><b>${pokeHp}</b></p>`;
+  pokedexAttack.innerHTML = `<p><b>${pokeAttack}</b></p>`;
+  pokedexDefense.innerHTML = `<p><b>${pokeDefense}</b></p>`;
   pokedexImg.src = pokeImage;
 };
 
@@ -83,4 +90,5 @@ const limitPokemons = (offset, limit) => {
     getPokemon(i);
   }
 };
+
 limitPokemons(offset, limit);

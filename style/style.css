@@ -153,8 +153,24 @@ body {
   border-radius: 15px;
   border: black 1px solid;
   display: flex;
+  flex-direction: row;
   justify-content: center;
 }
+
+.poke-info{
+  border-right: 1px black solid;
+  outline: 0;
+  border-radius: 10px 0 0 10px;
+  width: 30%;
+  height: 100%;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+
 
 .poke-image{
   width: 70%;
@@ -354,7 +370,7 @@ body {
   align-self: center; */
   width: 60px;
   height: 60px;
-  filter: grayscale(100%);
+  filter: grayscale(70%);
 }
 img {
   width: 100%;
