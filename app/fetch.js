@@ -1,7 +1,8 @@
 ("use strict");
 
 const URL_POKEMON = `https://pokeapi.co/api/v2/pokemon`;
-const URL_POKEMON_ABILITY = `https://pokeapi.co/api/v2/ability/`;
+const URL_POKEMON_TYPE = `https://pokeapi.co/api/v2/type/`;
+const URL_POKEMON_GENERATION = `https://pokeapi.co/api/v2/generation/`;
 const POKE_GRID = document.querySelector(".choose-panel__buttons");
 const PREVIOUS = document.querySelector(".choose-panel__previous");
 const NEXT = document.querySelector(".choose-panel__next");
@@ -79,7 +80,7 @@ const gridPokemons = (dataGet) => {
   POKE_GRID.appendChild(imageContainer);
 };
 
-//* Filtering section
+//* Filtering section by name and ID
 
 // BUTTON_SEARCH.onkeydown = filterPokemon();
 
@@ -98,6 +99,10 @@ async function filterPokemon() {
     console.log(new Error("There isn't such Pokemon. Try again"));
   }
 }
+
+//* Filtering section by Type
+
+//* Filtering section by Generation
 
 //* Buttons pagination
 
