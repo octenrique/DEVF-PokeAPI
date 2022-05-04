@@ -1,13 +1,103 @@
-"use strict";
+("use strict");
 
-const URL = `https://pokeapi.co/api/v2/pokemon/`;
-const URL2 = `https://pokeapi.co/api/v2/ability/`;
-const POKE_GRID = document.querySelector(".choose-panel__button");
+const URL_POKEMON = `https://pokeapi.co/api/v2/pokemon`;
+const URL_POKEMON_ABILITY = `https://pokeapi.co/api/v2/ability/`;
+const POKE_GRID = document.querySelector(".choose-panel__buttons");
 const PREVIOUS = document.querySelector(".choose-panel__previous");
 const NEXT = document.querySelector(".choose-panel__next");
+const POKE_NAME = document.querySelector("#pokeName");
+const BUTTON_SEARCH = document.querySelector("#search-button");
 
 let offset = 1;
-let limit = 20;
+let limit = 19;
+
+console.log(POKE_NAME.value);
+
+//* Fetching the API
+
+async function getPokemon(id = 1) {
+  try {
+    const resGet = await fetch(`${URL_POKEMON}/${id}/`);
+    const resDescription = await fetch(`${URL_POKEMON}-species/${id}`);
+    const dataGet = await resGet.json();
+    const dataDescription = await resDescription.json();
+    infoPokemon(dataGet);
+    gridPokemons(dataGet);
+    descriptionPokemon(dataDescription);
+  } catch (err) {
+    console.log(new Error("It couldn't be possible to connect to the PokeAPI"));
+  }
+}
+
+//* Getting the Pokemon info
+
+const infoPokemon = (dataGet) => {
+  let pokedexName = document.querySelector(".info__APIValue-name"),
+    pokedexHp = document.querySelector(".info__APIValue-hp"),
+    pokedexAttack = document.querySelector(".info__APIValue-attack"),
+    pokedexDefense = document.querySelector(".info__APIValue-defense"),
+    pokedexImg = document.querySelector(".poke-image__image");
+
+  let pokeName = dataGet.name,
+    pokeHp = dataGet.stats[0].base_stat,
+    pokeAttack = dataGet.stats[1].base_stat,
+    pokeDefense = dataGet.stats[2].base_stat,
+    pokeImage = dataGet.sprites.front_default;
+
+  pokedexName.innerHTML = `<p><b>${pokeName}</b></p>`;
+  pokedexHp.innerHTML = `<p><b>${pokeHp}</b></p>`;
+  pokedexAttack.innerHTML = `<p><b>${pokeAttack}</b></p>`;
+  pokedexDefense.innerHTML = `<p><b>${pokeDefense}</b></p>`;
+  pokedexImg.src = pokeImage;
+};
+
+const descriptionPokemon = (dataDescription) => {
+  let pokedexDescription = document.querySelector(
+    ".screen__description-container"
+  );
+
+  let pokeDescription = dataDescription.flavor_text_entries[0].flavor_text;
+
+  pokedexDescription.innerHTML = `<p>${pokeDescription}</p>`;
+};
+
+//* Attaching to the grid side
+
+const gridPokemons = (dataGet) => {
+  const imageContainer = document.createElement("div");
+  imageContainer.classList.add("pokemon-thumbnail");
+
+  const spriteContainer = document.createElement("div");
+  spriteContainer.classList.add("img-container");
+  spriteContainer.classList.add(`${dataGet.id}`);
+
+  const sprite = document.createElement("img");
+  sprite.src = dataGet.sprites.front_default;
+
+  spriteContainer.appendChild(sprite);
+  imageContainer.appendChild(spriteContainer);
+  POKE_GRID.appendChild(imageContainer);
+};
+
+//* Filtering section
+
+// BUTTON_SEARCH.onkeydown = filterPokemon();
+
+POKE_NAME.addEventListener("keydown", filterPokemon);
+BUTTON_SEARCH.addEventListener("onclick", filterPokemon);
+
+async function filterPokemon() {
+  try {
+    const resGet = await fetch(
+      `${URL_POKEMON}/${POKE_NAME.value.toLocaleLowerCase()}`
+    );
+    const dataGet = await resGet.json();
+
+    infoPokemon(dataGet);
+  } catch (err) {
+    console.log(new Error("There isn't such Pokemon. Try again"));
+  }
+}
 
 //* Buttons pagination
 
@@ -21,92 +111,31 @@ PREVIOUS.addEventListener("click", () => {
   if (offset != 1) {
     offset -= 19;
     removeChildNodes(POKE_GRID);
-    getPokemon(offset, limit);
+    limitPokemons(offset, limit);
   }
 });
 
 NEXT.addEventListener("click", () => {
   offset += 19;
   removeChildNodes(POKE_GRID);
-  fetchPokemons(offset, limit);
+  limitPokemons(offset, limit);
 });
-
-//* Fetching the API
-
-async function getPokemon(id = 1) {
-  let pokedexName = document.querySelector(".header__APIValue-name");
-  let pokedexType = document.querySelector(".header__APIValue-type");
-  let pokedexImg = document.querySelector(".poke-image__image");
-  try {
-    const response = await fetch(`${URL}${id}/`);
-    const data = await response.json();
-
-    let pokeName = data.name,
-      pokeAbilities = `${data.types[0]["type"]["name"]} & ${data.types[1]["type"]["name"]}`,
-      pokeImage = data.sprites["front_default"];
-
-    pokedexName.innerHTML = `<p><b>${pokeName}</b></p>`;
-    pokedexType.innerHTML = `<p><b>${pokeAbilities}</b></p>`;
-    pokedexImg.src = pokeImage;
-
-    createPokemon(data);
-    createImages(data);
-  } catch (err) {
-    console.log(new Error("It couldn't be possible to connect to the PokeAPI"));
-  }
-}
 
 const limitPokemons = (offset, limit) => {
   for (let i = offset; i <= offset + limit; i++) {
-    // console.log(i);
     getPokemon(i);
   }
 };
 
-//* Creating Pokemon
+limitPokemons(offset, limit);
 
-const createPokemon = (data) => {
-  let pokedexName = document.querySelector(".header__APIValue-name");
-  let pokedexType = document.querySelector(".header__APIValue-type");
-  let pokedexImg = document.querySelector(".poke-image__image");
+//* Choosing pokemon from the grid
 
-  let pokeName = data.name,
-    pokeAbilities = `${data.types[0]["type"]["name"]} & ${data.types[1]["type"]["name"]}`,
-    pokeImage = data.sprites["front_default"];
+// IMG_SELECTED.addEventListener(
+//   "click",
+//   (choosePokemon = () => {
+//     const IMG_SELECTED = document.querySelector(".img-container");
 
-  pokedexName.innerHTML = `<p><b>${pokeName}</b></p>`;
-  pokedexType.innerHTML = `<p><b>${pokeAbilities}</b></p>`;
-  pokedexImg.src = pokeImage;
-};
-
-//* Showing in the list panel
-
-function createImages(pokemon) {
-  const card = document.createElement("div");
-  card.classList.add("pokemon-thumbnail");
-
-  const loadContainer = document.createElement("div");
-  loadContainer.classList.add("img-container");
-
-  const sprite = document.createElement("img");
-  sprite.src = pokemon.sprites.front_default;
-  loadContainer.appendChild(sprite);
-
-  const number = document.createElement("p");
-  number.textContent = `#${pokemon.id.toString().padStart(3, 0)}`;
-
-  card.appendChild(loadContainer);
-  card.appendChild(number);
-
-  pokePanel.appendChild(card);
-}
-
-function pokeImgs(id) {
-  const imgContainer = document.querySelector(".choose-panel__buttons");
-  const pokeImg = document.createElement("img");
-
-  pokeImg.src = pokemon.sprites.front_default;
-  imgContainer.appendChild(imgContainer);
-}
-
-getPokemon();
+//     console.log(IMG_SELECTED);
+//   })
+// );

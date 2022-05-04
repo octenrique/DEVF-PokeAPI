@@ -275,7 +275,7 @@ body {
 .screen__description-container {
   width: 90%;
   height: 80%;
-  font-size: .7rem;
+  font-size: .9rem;
   text-shadow: -3px 2px rgba(1,1,1,0.2);
 
 }
@@ -420,6 +420,15 @@ body {
   height: 60px;
   filter: grayscale(70%);
 }
+
+.pokemon-thumbnail:hover{
+  cursor:pointer
+  }
+
+#search-button{
+  width: 20px;
+
+}
 img {
   width: 100%;
   height: 100%;
@@ -465,7 +474,8 @@ img {
   text-align: center;
 }
 
-#name {
+#pokeName {
+  color: white;
   border: 0;
   outline:0;
   background-color: #062923;
